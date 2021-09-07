@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{%block title%}Home{%endblock%}
+
+{%block content%}
+<h1>Parameters</h1>
+<div class="tabs">
+  <section id="section1">
+    <input type="radio" name="sections" id="option1" checked>
+    <label for="option1">Financial Parameters</label>
+    <article>
+      <h2>Financial Parameters</h2>
+		<br><p>Please enter the following scalar values:</p>
+		<form>
+			<tbody align="center">
+		        <tr align="left">
+		            <td>Project Lifetime (n), years</td>
+		            <td><input id="life_t" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Loan Interest Rate (r), %</td>
+		            <td><input id="loan_intr" type="text" if="myText" value="4" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Loan Period (ℓ), years</td>
+		            <td><input id="loan_t" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Inflation Rate (i), %</td>
+		            <td><input id="infl_r" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Annual O&M (m), %</td>
+		            <td><input id="o_and_m" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Real Discount Rate (d<sub>r</sub>)</td>
+		            <td><input id="disc_r" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		        <tr>
+		            <td>Energy Inflation Rate (i<sub>e</sub>), %</td>
+		            <td><input id="v_mph" type="text" if="myText" value="40" required> </td>
+		        </tr><br>
+		    </tbody>
+		    <input type="submit" value="Submit">
+		</form>
+    </article>
+  </section>
+
+  <section id="section2">
+    <input type="radio" name="sections" id="option2">
+    <label for="option2">Vehicle Parameters</label>
+    <article>
+    	<h2>Vehicle Parameters</h2>
+	    <p>Please enter the following values corresponding to each vehicle weight category (HDV, MDV, LDV)</p>
+	      <table class="table table-striped">
+	    <thead>
+	        <tr>
+	        <th>Parameters</th>
+	        <th>HDV</th>
+	        <th>MDV</th>
+	        <th>LDV</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>Drag Coefficient (C<sub>d</sub>)</td>
+	            <td><input id="Cd_HDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Cd_MDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Cd_LDV" type="text" if="myText" value="23" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Frontal Area (A), m<sup>2</sup></td>
+	            <td><input id="A_HDV" type="text" if="myText" value="12" required> </td>
+	            <td><input id="A_MDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="A_LDV" type="text" if="myText" value="34" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Rolling Resistance Coefficient (C<sub>rr</sub>)</td>
+	            <td><input id="Crr_HDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Crr_MDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Crr_LDV" type="text" if="myText" value="23" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Mass (m), ton</td>
+	            <td><input id="M_HDV" type="text" if="myText" value="45" required> </td>
+	            <td><input id="M_MDV" type="text" if="myText" value="56" required> </td>
+	            <td><input id="M_LDV" type="text" if="myText" value="67" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Electric Drivetrain Efficiency (η<sub>dr</sub>)</td>
+	            <td><input id="Ndr_HDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Ndr_MDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Ndr_LDV" type="text" if="myText" value="23" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Auxiliary Load (P<sub>aux</sub>), kW</td>
+	            <td><input id="Paux_HDV" type="text" if="myText" value="56" required> </td>
+	            <td><input id="Paux_MDV" type="text" if="myText" value="85" required> </td>
+	            <td><input id="Paux_LDV" type="text" if="myText" value="2.253" required> </td>
+	        </tr>
+	        <tr>
+	            <td>Charging Power (P<sub>ch</sub>), kW</td>
+	            <td><input id="Pch_HDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Pch_MDV" type="text" if="myText" value="23" required> </td>
+	            <td><input id="Pch_LDV" type="text" if="myText" value="23" required> </td>
+	        </tr>
+	    </tbody>
+	</table>
+		<br><p>Please enter the following scalar values:</p>
+		<tbody>
+	        <tr>
+	            <td>Average Vehicle Speed (MPH)</td>
+	            <td><input id="v_mph" type="text" if="myText" value="65" required> </td>
+	            <br><br>
+	        </tr>
+	    </tbody>
+    </article>
+  </section>
+  <section id="section3">
+    <input type="radio" name="sections" id="option3">
+    <label for="option3">Traffic Parameters</label>
+    <article>
+      <h2>Traffic Parameters</h2>
+    </article>
+  </section>
+  <section id="section4">
+    <input type="radio" name="sections" id="option4">
+    <label for="option4">Distribution Network Parameters</label>
+    <article>
+      <h2>Distribution Network Parameters</h2>
+    </article>
+  </section>
+</div>{% endblock %}

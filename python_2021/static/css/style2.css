@@ -1,0 +1,125 @@
+h1 {
+  color: #333;
+  font-family: arial, sans-serif;
+  margin: 1em auto;
+  width: 80%;
+}
+
+.tabs {
+  color: #333;
+  display: block;
+  font-family: arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 80%;
+}
+
+.tabs input[name="sections"] {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+}
+
+.tabs section {
+  display: block;
+}
+
+.tabs section label {
+  background: #ccc;
+  border:1px solid #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 15px 20px;
+  position: relative;
+  width: 180px;
+  z-index:100;
+}
+
+.tabs section article {
+  display: none;
+  left: 230px;
+  min-width: 300px;
+  padding: 0 0 0 21px;
+  position: absolute;  
+  top: 0;
+}
+
+.tabs section article:after {
+  background-color: #fff;
+  bottom: 0;
+  content: "";
+  display: block;
+  left:-229px;
+  position: absolute;
+  top: 0;
+  width: 220px;
+  z-index:1;
+}
+
+.tabs input[name="sections"]:checked + label { 
+  background: #eee;
+  color: #bbb;
+}
+
+.tabs input[name="sections"]:checked ~ article {
+  display: block;
+}
+
+
+@media (max-width: 533px) {
+  
+  h1 {
+    width: 100%;
+  }
+
+  .tabs {
+    width: 100%;
+  }
+  
+  .tabs section label {
+    font-size: 1em;
+    width: 160px;
+  }  
+
+ .tabs section article {
+    left: 200px;
+    min-width: 270px;
+  } 
+  
+  .tabs section article:after {
+    background-color: #fff;
+    bottom: 0;
+    content: "";
+    display: block;
+    left:-199px;
+    position: absolute;
+    top: 0;
+    width: 200px;
+
+  }  
+  
+}
+
+
+@media (max-width: 768px) {
+  h1 {
+    width: 96%;
+  }
+
+  .tabs {
+    width: 96%;
+  }
+}
+
+
+@media (min-width: 1366px) {
+  h1 {
+    width: 70%;
+  }
+
+  .tabs {
+    width: 70%;
+  }
+}

@@ -1,0 +1,625 @@
+{% extends "base.html" %}
+{%block title%}Home{%endblock%}
+
+{%block content%}
+<html>
+  <head>
+    <div class="text-top">
+      <h1>Purdue ASPIRE</h1>
+      <p>Use this website to input the required electric roadway inputs and it'll display the resulting values.</p>
+    </div>
+  </head><br>
+  <div class="stepwizard col-md-offset-0">
+      <div class="stepwizard-row setup-panel">
+        <div class="stepwizard-step">
+          <a href="#step-1" type="button" class="btn btn-primary btn-circle" style="">General & <br>Financial <br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled" style="vertical-align: middle;">Electric<br>Roadway Cost<br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">Vehicle<br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">Traffic<br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">Electric<br>Roadway<br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">HDV Breakeven<br>Point<br>Parameters</a>
+        </div>
+        <div class="stepwizard-step">
+          <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">Risk<br>Analysis<br>Parameters</a>
+        </div>
+      </div>
+    </div><br>
+  <div class="container">
+    <form role="form" action="#" method="post" class="form-all">
+      <div class="row setup-content" id="step-1">
+        <div class="col-xs-7 col-md-offset-0">
+          <div class="col-md-12">
+            <h2>General Parameters</h2>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Project Lifetime (n), years</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="1" required="required" class="form-control" placeholder="Project Lifetime" value="40" title="Cannot be less than 1" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Average Vehicle Speed, mph</label>
+              <input name="veh_spd" maxlength="10" step="any" id="number" type="number" min="1" required="required" class="form-control" placeholder="Average Vehicle Speed" value="65" title="Cannot be less than 1" oninput="validity.valid||(value='');">
+            </div><hr>
+            <h2>Financial Parameters</h2>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Loan Interest Rate (r), %</label>
+              <input name="loan_intr" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Loan Interest Rate" value="2.5" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Loan Period (ℓ), years</label>
+              <input name="loan_prd" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Loan Period" value="30" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Inflation Rate (i), %</label>
+              <input name="infl_r" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Inflation Rate" value="2" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Annual O&M (m), %</label>
+              <input name="ann_OM" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Annual O&M" value="1.5" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Real Discount Rate (d<sub>r</sub>), %</label>
+              <input name="disc_r" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Real Discount Rate" value="7" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Energy Inflation Rate (i<sub>e</sub>), %</label>
+              <input name="engy_inf_r" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Energy Inflation Rate" value="2.26" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-2">
+        <div class="col-xs-7 col-md-offset-0">
+          <div class="col-md-12">
+            <h2>Electric Roadway Cost Parameters</h2>
+            <h4>Charging System</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Cost of Magnetic Components in Tx design, $/km</label>
+              <input name="mag_c_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Cost of Magnetic Components in Tx Design" value="435000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Tx Installation Cost, $/km</label>
+              <input name="Tx_inst_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Tx Installation Cost" value="385000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Tx Inverter Cost, $/km</label>
+              <input name="Tx_inv_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Tx Inverter Cost" value="367000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">TR-unit Rectifier Cost, $/km</label>
+              <input name="TR_rect_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="TR-unit Rectifier Cost" value="108000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">TR-unit Transformer Cost, $/km</label>
+              <input name="TR_tran_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="TR-unit Transformer Cost" value="245000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Cost for TR-unit Installation, Grounding, and Switchgear, $/km</label>
+              <input name="TR_stuff_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Cost for TR-unit Installation, Grounding, and Switchgear" value="50000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Cost for Infrastructure Monitoring and Management System, $/km</label>
+              <input name="monit_cost" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Cost for Infrastructure Monitoring and Management System" value="50000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div><hr>
+            <h4>Grid Interconnection</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Feeder: Base Cost (right-of-way plus structures) for Single<br>Distribution Line, $/km</label>
+              <input name="feed_base_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Feeder: Base Cost for Single Distribution Line" value="313000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Feeder: Total Cost for Total Length of Double Circuit Line, $/km</label>
+              <input name="feed_tot_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Feeder: Total Cost for Total Length of Double Circuit Line" value="210000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Substation: Total Base Construction Cost, $</label>
+              <input name="sub_tot_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Substation: Total Base Construction Cost" value="616000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Substation: Variable Construction Cost, $</label>
+              <input name="sub_var_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Substation: Variable Construction Cost" value="197000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div><hr>
+            <h4>Please enter the following costs ($/m) for each distribution line conductor size:</h4>
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                      <th>Conductor Size</th>
+                      <th>Cost ($/m)</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>700 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="700_cond" id="700_cond" type="number" if="myText" value="12.30" placeholder="700 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>550 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="550_cond" id="550_cond" type="number" if="myText" value="10.20" placeholder="550 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>500 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="500_cond" id="500_cond" type="number" if="myText" value="9.90" placeholder="500 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>450 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="450_cond" id="450_cond" type="number" if="myText" value="8.70" placeholder="450 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>400 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="400_cond" id="400_cond" type="number" if="myText" value="7.50" placeholder="400 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>350 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="350_cond" id="350_cond" type="number" if="myText" value="6.30" placeholder="350 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>300 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="300_cond" id="300_cond" type="number" if="myText" value="5.60" placeholder="300 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>250 (kcmil)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="250_cond" id="250_cond" type="number" if="myText" value="5.00" placeholder="250 (kcmil)" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>4/0 AWG</td>
+                          <td>
+                            <div class="form-group">   
+                              <input name="4_0_cond" id="4_0_cond" type="number" if="myText" value="4.70" placeholder="4/0 AWG" maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table><hr>
+            <h4>Civil Infrastructure</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Full-lane Reconstruction Option Cost, $/km</label>
+              <input name="full_l_recon_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Full-lane Reconstruction Option Cost" value="1302000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Full-lane Prefabricated Option Cost, $/km</label>
+              <input name="full_l_pref_c" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Full-lane Prefabricated Option Cost" value="1531000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-3">
+        <div class="col-xs-7 col-md-offset-0">
+          <div class="col-md-12">
+            <h2>Vehicle Parameters</h2>
+            <p>Please enter the following values corresponding to each vehicle weight category (HDV, MDV, LDV):</p>
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                      <th>Parameters</th>
+                      <th>HDV</th>
+                      <th>MDV</th>
+                      <th>LDV</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>Drag Coefficient (C<sub>d</sub>)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Cd_HDV" type="number" if="myText" value="0.65" placeholder="HDV: Drag Coefficient" maxlength="10" step="any" id="number" type="number" min="0" max="3" title="Cannot be less than 0 or greater than 3" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Cd_MDV" placeholder="MDV: Drag Coefficient" type="number" if="myText" value="0.55"  maxlength="10" step="any" id="number" type="number" min="0" max="3" title="Cannot be less than 0 or greater than 3" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Cd_LDV" placeholder="LDV: Drag Coefficient" type="number" if="myText" value="0.28"  maxlength="10" step="any" id="number" type="number" min="0" max="3" title="Cannot be less than 0 or greater than 3" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Frontal Area (A), m<sup>2</sup></td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="A_HDV" placeholder="HDV: Frontal Area" type="number" if="myText" value="10.2"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="A_MDV" placeholder="MDV: Frontal Area" type="number" if="myText" value="6.0"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="A_LDV" placeholder="LDV: Frontal Area" type="number" if="myText" value="2.4"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Rolling Resistance Coefficient (C<sub>rr</sub>)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Crr_HDV" placeholder="HDV: Rolling Resistance Coefficient" type="number" if="myText" value="0.0068"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Crr_MDV" placeholder="MDV: Rolling Resistance Coefficient" type="number" if="myText" value="0.0065"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Crr_LDV" placeholder="LDV: Rolling Resistance Coefficient" type="number" if="myText" value="0.0060"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Mass (m), ton</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="m_HDV" placeholder="HDV: Mass" type="number" if="myText" value="30.5"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="m_MDV" placeholder="MDV: Mass" type="number" if="myText" value="7.2"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="m_LDV" placeholder="LDV: Mass" type="number" if="myText" value="1.5"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Electric Drivetrain Efficiency (η<sub>dr</sub>)</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Ndr_HDV" placeholder="HDV: Electric Drivetrain Efficiency" type="number" if="myText" value="0.92"  maxlength="10" step="any" id="number" type="number" min="0" max="1" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Ndr_MDV" placeholder="MDV: Electric Drivetrain Efficiency" type="number" if="myText" value="0.95"  maxlength="10" step="any" id="number" type="number" min="0" max="1" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Ndr_LDV" placeholder="LDV: Electric Drivetrain Efficiency" type="number" if="myText" value="0.95"  maxlength="10" step="any" id="number" type="number" min="0" max="1" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Auxiliary Load (P<sub>aux</sub>), kW</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Paux_HDV" placeholder="HDV: Auxiliary Load" type="number" if="myText" value="7.5"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Paux_MDV" placeholder="MDV: Auxiliary Load" type="number" if="myText" value="2.0"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Paux_LDV" placeholder="LDV: Auxiliary Load" type="number" if="myText" value="2.0"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Charging Power (P<sub>ch</sub>), kW</td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Pch_HDV" placeholder="HDV: Charging Power" type="number" if="myText" value="25"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Pch_MDV" placeholder="MDV: Charging Power" type="number" if="myText" value="10"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">   
+                              <input id="Pch_LDV" placeholder="LDV: Charging Power" type="number" if="myText" value="2.5"  maxlength="10" step="any" id="number" type="number" min="0" title="Cannot be less than 0" oninput="validity.valid||(value='');" required="required">
+                            </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table><hr>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-4">
+        <div class="col-xs-7 col-md-offset-0">
+          <div class="col-md-12">
+            <h2>Traffic Parameters</h2>
+            <p>Please use the following excel templates to upload the data for:</p>
+            <ul>
+              <li>Annual Average Daily Traffic (AADT)</li>
+              <li>Annual Traffic Growth Factor (g)</li>
+              <li>Hourly Traffic Multiplier (k)</li>
+              <li>Multiplier for Change in Traffic Volumes (M)</li>
+              <li>Length of Segments (ℓ)</li>
+            </ul>
+            <h3>Template: <a href="file:///C:/Users/palom/Documents/python_2021/templates/files/traff_vals.xlsx">traff_vals.xlsx</a></h3>
+
+            <form class="" action="data" method="post">
+              <input type="file" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" id="excelUpload" type="excelUpload" name="upload-file" value="" />
+            </form>
+
+            <hr>
+
+            <p>Please enter the following penetration level values:</p>
+            <div class="form-group">
+              <label class="control-label">Final HDV Penetration (q<sub>f, HDV</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Final HDV Penetration" value="75" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Final MDV Penetration (q<sub>f, MDV</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Final MDV Penetration" value="50" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Final LDV Penetration (q<sub>f, LDV</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Final LDV Penetration" value="30" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div><hr>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Growth Factor (α)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Growth Factor" value="0.45" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Year at which 50% of Final Penetration Level is Reached (t<sub>0</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Year at which 50% of Final Penetration Level is Reached" value="15" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-5">
+        <div class="col-xs-7 col-md-offset-4">
+          <div class="col-md-12">
+            <h2>Electric Roadway Parameters</h2>
+            <h4>Charging System</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Tx-to-Rx Power Transfer Efficiency (η<sub>DWPT</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" max="1" required="required" class="form-control" placeholder="Tx-to-Rx Power Transfer Efficiency" value="0.93" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Efficiency of Inverter (η<sub>inv</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" max="1" required="required" class="form-control" placeholder="Efficiency of Inverter" value="0.98" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Efficiency of TR Unit (η<sub>TR</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" max="1" required="required" class="form-control" placeholder="TR Unit" value="0.95" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');">
+            </div><hr>
+            <h4>Distribution Network</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Total Number of Substations</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Total Number of Substations" value="12" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Power Loss (r<sub>loss</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Power Loss" value="3" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Energy Contribution from Energy Storage Systems (g<sub>ESS</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Energy Contribution from Energy Storage Systems" value="15" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Road-trip Efficiency (η<sub>ESS</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" max="1" required="required" class="form-control" placeholder="Road-trip Efficiency" value="0.85" title="Cannot be less than 0 or greater than 1" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Energy Contribution from Renewable Energy Sources (g<sub>RES</sub>), %</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Energy Contribution from Renewable Energy Sources" value="60" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Distance from Substation to Roadway, km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Distance from Substation to Roadway" value="0.4" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Lifespan of Vehicles, km</label>
+              <input maxlength="100" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Lifespan of Vehicles" value="1600000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Design Safety Factor</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Design Safety Factor" value="1.2" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-6">
+        <div class="col-xs-7 col-md-offset-4">
+          <div class="col-md-12">
+            <h2>HDV Breakeven Point Parameters</h2>
+            <h4>Differential Cost of Switching From ICE to Electric Powertrain</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">Powertrain Rated Peak, kW</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Powertrain Rated Peak" value="485" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Diesel Engine Cost per kW, $/kW</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Diesel Engine Cost per kW" value="122" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Electric Drivetrain Cost per kW, $/kW</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Electric Drivetrain Cost per kW" value="12" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Cost of Rx & Supporting Power Electronics, $/kW</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Cost of Rx & Supporting Power Electronics" value="0.0075" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Battery Capacity in DWPT-HDV, kWh</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Battery Capacity in DWPT-HDV" value="100" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Battery Price Point, $/kWh</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Battery Price Point" value="100" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Battery Pack Cost, $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Battery Pack Cost" value="0.0063" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div><hr>
+            <h4>Breakeven Point</h4>
+            <p>Please enter the following scalar values:</p>
+            <div class="form-group">
+              <label class="control-label">ICE Maintenance Costs (M<sub>ICE</sub>), $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="ICE Maintenance Costs" value="0.10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Electric Powertain Repair & Maintenance Cost, $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Electric Powertain Repair & Maintenance Cost" value="0.05" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Battery Replacement Cost, $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Battery Replacement Cost" value="0.0063" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">DWPT Maintenance Costs (M<sub>DWPT</sub>), $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="DWPT Maintenance Costs" value="0.0563" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Average Diesel Price (c<sub>diesel</sub>), $/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Average Diesel Price" value="0.85" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">ICE Average Fuel Efficiency (γ<sub>ICE</sub>), km/L</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="ICE Average Fuel Efficiency" value="2.55" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Electricity Price of Stationary Charging (c<sub>st</sub>), $/kWh</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Electricity Price of Stationary Charging" value="0.14" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Fraction of Energy of Stationary Charging (w<sub>st</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Fraction of Energy of Stationary Charging" value="0.25" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Fraction of Energy of ER (w<sub>ER</sub>)</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Fraction of Energy of ER" value="0.75" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Average Energy Consumption of Vehicle (E<sub>DWPT,avg</sub>), kWh/km</label>
+              <input maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Average Energy Consumption of Vehicle" value="1.44" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button><br><br>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-7">
+        <div class="col-xs-7 col-md-offset-0">
+          <div class="col-md-12">
+            <h2>Risk Analysis Parameters</h2>
+            <p>Please enter the following coeffecient of variation (CV) values:</p>
+            <div class="form-group">
+              <label class="control-label">Capital Cost (OCC) CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Capital Cost CV" value="20" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Loan Interest Rate CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Loan Interest Rate CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Real Discount Rate CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Real Discount Rate CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Annual O&M CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Annual O&M CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Inflation Rate CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Inflation Rate CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Utility energy Price CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Utility Energy Price CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Energy Inflation Rate CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Energy Inflation Rate CV" value="10" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Traffic Growth CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Traffic Growth CV" value="1.5" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Intial AADT CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Initial AADT CV" value="15" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Final DWPT-EV Penetration CV, %</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Final DWPT-EV Penetration CV" value="20" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div><hr>
+            <p>Please enter the following scalar value:</p>
+            <div class="form-group">
+              <label class="control-label">Number of Monte Carlo Simulations</label>
+              <input name="proj_life" maxlength="10" step="any" id="number" type="number" min="0" required="required" class="form-control" placeholder="Number of Monte Carlo Simulations" value="1000" title="Cannot be less than 0" oninput="validity.valid||(value='');">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+            <input class="btn btn-success btn-lg pull-right" value="Submit" type="submit"><br><br>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</html>
+
+{% endblock %}
